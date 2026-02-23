@@ -3,6 +3,7 @@ import { CapitalPage } from "./pages/capital-page/capital-page";
 import { CountryLayout } from "./layouts/country-layout/country-layout";
 import { CountryPage } from './pages/country-page/country-page';
 import { RegionPage } from './pages/region-page/region-page';
+import { CountryNamePage } from "./pages/country-name-page/country-name-page";
 
 const countryRoutes: Routes = [
   {
@@ -21,6 +22,10 @@ const countryRoutes: Routes = [
         path: 'region',
         component: RegionPage,
       },
+      {
+        path: 'by/:country',
+        component: CountryNamePage,
+      }
     ]
   }
 ]
