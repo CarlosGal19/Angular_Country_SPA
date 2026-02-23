@@ -1,0 +1,6 @@
+<div class="flex flex-row gap-2 mt-2">
+  <input type="text" class="input input-bordered mr-2 w-56" placeholder="Search by capital" autofocus
+    (keyup.enter)="getCapital(inCapital.value)" #inCapital>
+  <button class="btn btn-primary" (click)="getCapital(inCapital.value)">Search</button>
+
+</div>
