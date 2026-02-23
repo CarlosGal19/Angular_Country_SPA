@@ -1,10 +1,17 @@
 import { Routes } from "@angular/router";
-import { CapitalPape } from "./pages/capital-pape/capital-pape";
+import { CapitalPage } from "./pages/capital-page/capital-page";
+import { CountryLayout } from "./layouts/country-layout/country-layout";
 
 const countryRoutes: Routes = [
   {
     path: '',
-    component: CapitalPape
+    component: CountryLayout,
+    children: [
+      {
+        path: 'capital',
+        component: CapitalPage
+      }
+    ]
   }
 ]
 
