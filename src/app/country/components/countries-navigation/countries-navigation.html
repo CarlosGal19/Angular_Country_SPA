@@ -1,0 +1,32 @@
+<div class="p-4 w-full">
+  <ul class="menu sm:menu-horizontal bg-base-200 rounded-box">
+    <li>
+      <a routerLink="/country/capital" routerLinkActive="btn btn-primary" [routerLinkActiveOptions]="{exact:true}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+          <path fill="currentColor"
+            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7M7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9" />
+          <circle cx="12" cy="9" r="2.5" fill="currentColor" />
+        </svg>
+        By capital
+      </a>
+    </li>
+    <li>
+      <a routerLink="/country/country" routerLinkActive="btn btn-primary" [routerLinkActiveOptions]="{exact:true}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+          <path fill="currentColor"
+            d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1l3.5 1v-1.5L13 19v-5.5z" />
+        </svg>
+        By country
+      </a>
+    </li>
+    <li>
+      <a routerLink="/country/region" routerLinkActive="btn btn-primary" [routerLinkActiveOptions]="{exact:true}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+          <path fill="currentColor"
+            d="m20.5 3l-.16.03L15 5.1L9 3L3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1l5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5M15 19l-6-2.11V5l6 2.11z" />
+        </svg>
+        By region
+      </a>
+    </li>
+  </ul>
+</div>
