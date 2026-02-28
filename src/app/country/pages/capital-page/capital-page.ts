@@ -30,7 +30,7 @@ export class CapitalPage {
       error: (error) => {
         this.isLoading.set(false);
         this.countries.set([]);
-        this.isError.set(`Country with capital ${capital} does not exist.`);
+        this.isError.set(error.message);
       }
     });
   }
