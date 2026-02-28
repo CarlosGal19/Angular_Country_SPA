@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
 import { ICountryResponse } from '../../interfaces/country-response.interface';
+import { ICountry } from '../../interfaces/country.interface';
 
 @Component({
   selector: 'country-search-table',
@@ -7,5 +8,5 @@ import { ICountryResponse } from '../../interfaces/country-response.interface';
   templateUrl: './country-search-table.html',
 })
 export class CountrySearchTable {
-  countries = input.required<ICountryResponse[]>();
+  countries = input.required<ICountry[]>();
 }
