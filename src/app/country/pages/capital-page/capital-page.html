@@ -1,2 +1,6 @@
 <country-search-input (capital)="getCapital($event)" />
-<country-search-table [countries]="countries()" />
+@if (isError()) {
+  <h3>{{isError()}}</h3>
+} @else {
+  <country-search-table [countries]="countries()" />
+}
