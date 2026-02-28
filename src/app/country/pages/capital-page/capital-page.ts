@@ -1,4 +1,3 @@
-import { toSignal } from '@angular/core/rxjs-interop';
 import { Component, inject, signal } from '@angular/core';
 import { CountrySearchInput } from "../../../shared/components/country-search-input/country-search-input";
 import { CountrySearchTable } from "../../components/country-search-table/country-search-table";
@@ -12,12 +11,18 @@ import { ICountryResponse } from '../../interfaces/country-response.interface';
 })
 export class CapitalPage {
   countryService = inject(CountryService);
+  isLoading = signal(false);
 
   countries = signal<ICountryResponse[]>([]);
 
   getCapital(capital: string) {
+    if (this.isLoading()) return;
+    this.isLoading.set(true);
+    this.countries.set([]);
     this.countryService.getCountriesByCapital(capital).subscribe((data) => {
       this.countries.set(data);
+      this.isLoading.set(false);
+      console.log(data);
     })
   }
 }
