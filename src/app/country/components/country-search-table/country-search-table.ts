@@ -1,10 +1,11 @@
 import { Component, input } from '@angular/core';
 import { ICountryResponse } from '../../interfaces/country-response.interface';
 import { ICountry } from '../../interfaces/country.interface';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'country-search-table',
-  imports: [],
+  imports: [DecimalPipe],
   templateUrl: './country-search-table.html',
 })
 export class CountrySearchTable {

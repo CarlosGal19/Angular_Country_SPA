@@ -21,7 +21,12 @@
             </td>
             <td>{{country.name.official}}</td>
             <td>{{country.capital}}</td>
-            <td>{{country.population}}</td>
+            <!-- <td>{{country.population}}</td> -->
+             <td>
+              <span class="badge badge-secondary">
+                {{ country.population | number:'1.0-0' }}
+              </span>
+             </td>
           </tr>
         }
       </tbody>
