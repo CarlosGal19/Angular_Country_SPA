@@ -1,6 +1,7 @@
-<country-search-input (capital)="getCapital($event)" />
-@if (isError()) {
-  <h3>{{isError()}}</h3>
-} @else {
-  <country-search-table [countries]="countries()" />
+<country-search-input (capital)="query.set($event)" />
+@if (countryResource.error()) {
+  <h3>{{countryResource.error()!.message}}</h3>
+}
+@if (countryResource.hasValue()) {
+  <country-search-table [countries]="countryResource.value()" />
 }
