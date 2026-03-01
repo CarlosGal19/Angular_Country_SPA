@@ -17,6 +17,8 @@ export class CapitalPage {
 
   query = signal('');
 
+  // Resource works with observables
+  // Resource works with promises
   countryResource = rxResource({
     params: () => ({
       query: this.query()
