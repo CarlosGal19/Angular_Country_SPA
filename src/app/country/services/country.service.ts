@@ -41,7 +41,7 @@ export class CountryService {
       )
   }
 
-  getCountries(query: string, option: 'name' | 'capital' | 'cca2' | 'region' ) {
+  getCountries(query: string, option: 'name' | 'capital' | 'alpha' | 'region' ) {
     const lowerQuery = query.toLocaleLowerCase()
 
     return this.http.get<ICountryResponse[]>(`https://restcountries.com/v3.1/${option}/${lowerQuery}`).
