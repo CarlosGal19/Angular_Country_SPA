@@ -1,1 +1,9 @@
-<p>country-page works!</p>
+<country-search-input (capital)="query.set($event)" placeholderMessage="name"/>
+
+@if (countryNameResource.error()) {
+  <h3>{{countryNameResource.error()!.message}}</h3>
+}
+
+@if (countryNameResource.hasValue()) {
+  <country-search-table [countries]="countryNameResource.value()" />
+}

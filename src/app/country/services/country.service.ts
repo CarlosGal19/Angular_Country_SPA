@@ -26,4 +26,18 @@ export class CountryService {
         })
       )
   }
+
+  getCountriesByName(nameQuery: string) {
+    const lowerQuery = nameQuery.toLocaleLowerCase();
+
+    return this.http.get<ICountryResponse[]>(`https://restcountries.com/v3.1/name/${lowerQuery}`).
+      pipe(
+        map(c => {
+          return this.countryMapper.mapCountries(c)
+        }),
+        catchError(() => {
+          return throwError(() => new Error('Failed to fetch countries'))
+        })
+      )
+  }
 }
