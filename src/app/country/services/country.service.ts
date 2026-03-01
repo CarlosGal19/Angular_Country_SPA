@@ -40,4 +40,18 @@ export class CountryService {
         })
       )
   }
+
+  getCountries(query: string, option: 'name' | 'capital' | 'cca2' | 'region' ) {
+    const lowerQuery = query.toLocaleLowerCase()
+
+    return this.http.get<ICountryResponse[]>(`https://restcountries.com/v3.1/${option}/${lowerQuery}`).
+      pipe(
+        map(c => {
+          return this.countryMapper.mapCountries(c)
+        }),
+        catchError(() => {
+          return throwError(() => new Error('Failed to fetch countries'))
+        })
+      )
+  }
 }
