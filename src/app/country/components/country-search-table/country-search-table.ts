@@ -10,4 +10,8 @@ import { DecimalPipe } from '@angular/common';
 })
 export class CountrySearchTable {
   countries = input.required<ICountry[]>();
+
+  errorMessage = input<string>();
+  isLoading = input<boolean>(false);
+  isEmpty = input<boolean>(false);
 }

@@ -29,6 +29,27 @@
              </td>
           </tr>
         }
+        @if (errorMessage()) {
+          <tr>
+            <td colspan="8" class="text-center">
+              {{errorMessage()}}
+            </td>
+          </tr>
+        }
+        @if (isEmpty() && !isLoading()) {
+          <tr>
+            <td colspan="8" class="text-center">
+              Countries were not found
+            </td>
+          </tr>
+        }
+        @if (isLoading()) {
+          <tr>
+            <td colspan="8" class="text-center">
+              Searching countries...
+            </td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
