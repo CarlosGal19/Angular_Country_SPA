@@ -27,7 +27,7 @@ export class CapitalPage {
       if (params.query == '') return of([]);
 
       // firstValueFrom parse an observable to a source reference (signal)
-      return this.countryService.getCountriesByCapital(params.query)
+      return this.countryService.getCountries(params.query, 'capital')
     }
   })
 

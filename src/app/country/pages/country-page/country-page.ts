@@ -23,7 +23,7 @@ export class CountryPage {
     stream: ({params}) => {
       if (params.name == '') return of([]);
 
-      return this.countryService.getCountriesByName(params.name);
+      return this.countryService.getCountries(params.name, 'name');
     }
   })
 }
