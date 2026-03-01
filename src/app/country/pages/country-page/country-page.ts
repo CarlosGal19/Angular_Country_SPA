@@ -3,7 +3,8 @@ import { CountrySearchInput } from "../../../shared/components/country-search-in
 import { CountryService } from '../../services/country.service';
 import { CountrySearchTable } from '../../components/country-search-table/country-search-table';
 import { ICountry } from '../../interfaces/country.interface';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, of } from 'rxjs';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'country-page',
@@ -15,14 +16,14 @@ export class CountryPage {
 
   query = signal('');
 
-  countryNameResource = resource({
+  countryNameResource = rxResource({
     params: () => ({
       name: this.query()
     }),
-    loader: async ({params}): Promise<ICountry[]> => {
-      if (params.name == '') return [];
+    stream: ({params}) => {
+      if (params.name == '') return of([]);
 
-      return await firstValueFrom(this.countryService.getCountriesByName(params.name));
+      return this.countryService.getCountriesByName(params.name);
     }
   })
 }
