@@ -7,6 +7,7 @@ import { Component, inject } from '@angular/core';
   templateUrl: './not-found.html',
 })
 export class NotFoundComponent {
+  // Location service helps to manage browser urls
   location = inject(Location);
 
   goBack() {
