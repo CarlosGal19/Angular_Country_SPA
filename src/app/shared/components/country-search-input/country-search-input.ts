@@ -1,4 +1,4 @@
-import { Component, ElementRef, input, output, ViewChild } from '@angular/core';
+import { Component, effect, ElementRef, input, output, signal, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'country-search-input',
@@ -6,13 +6,27 @@ import { Component, ElementRef, input, output, ViewChild } from '@angular/core';
   templateUrl: './country-search-input.html',
 })
 export class CountrySearchInput {
-  @ViewChild('inCapital', { static: false }) inputCapital!: ElementRef;
+  // @ViewChild('inCapital', { static: false }) inputCapital!: ElementRef;
   capital = output<string>();
   placeholderMessage = input.required<String>();
+
+  inputValue = signal<string>('');
+
+  debounceEffect = effect((onCleanup) => {
+    const value = this.inputValue();
+
+    const timeout = setTimeout(() => {
+      this.getCapital(value);
+    }, 500);
+
+    onCleanup(() => {
+      clearTimeout(timeout);
+    })
+  })
 
   getCapital(capital: string) {
     if (!capital) return;
     this.capital.emit(capital)
-    this.inputCapital.nativeElement.value = '';
+    // this.inputCapital.nativeElement.value = '';
   }
 }
