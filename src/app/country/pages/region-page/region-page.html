@@ -1,1 +1,8 @@
-<p>region-page works!</p>
+<country-search-input (capital)="query.set($event)" placeholderMessage="name"/>
+
+<country-search-table
+  [countries]="countryRegionResource.value() ?? []"
+  [errorMessage]="countryRegionResource.error()?.message"
+  [isLoading]="countryRegionResource.isLoading()"
+  [isEmpty]="countryRegionResource.value()?.length === 0"
+/>
