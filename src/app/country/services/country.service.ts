@@ -13,34 +13,6 @@ export class CountryService {
 
   capitalCountries = signal('');
 
-  getCountriesByCapital(capitalQuery: string) {
-    const lowerQuery = capitalQuery.toLocaleLowerCase();
-
-    return this.http.get<ICountryResponse[]>(`https://restcountries.com/v3.1/capital/${lowerQuery}`).
-      pipe(
-        map(c => {
-          return this.countryMapper.mapCountries(c);
-        }),
-        catchError(() => {
-          return throwError(() => new Error("Failed to fetch countries"))
-        })
-      )
-  }
-
-  getCountriesByName(nameQuery: string) {
-    const lowerQuery = nameQuery.toLocaleLowerCase();
-
-    return this.http.get<ICountryResponse[]>(`https://restcountries.com/v3.1/name/${lowerQuery}`).
-      pipe(
-        map(c => {
-          return this.countryMapper.mapCountries(c)
-        }),
-        catchError(() => {
-          return throwError(() => new Error('Failed to fetch countries'))
-        })
-      )
-  }
-
   getCountries(query: string, option: 'name' | 'capital' | 'alpha' | 'region' ) {
     const lowerQuery = query.toLocaleLowerCase()
 

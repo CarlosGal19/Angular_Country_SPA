@@ -1,10 +1,8 @@
-import { Component, inject, resource, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CountrySearchInput } from '../../../shared/components/country-search-input/country-search-input';
 import { CountrySearchTable } from '../../components/country-search-table/country-search-table';
 import { CountryService } from '../../services/country.service';
-import { ICountryResponse } from '../../interfaces/country-response.interface';
-import { ICountry } from '../../interfaces/country.interface';
-import { firstValueFrom, Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
