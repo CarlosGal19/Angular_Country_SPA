@@ -12,14 +12,14 @@ export class CountryMapper {
     return {
       flag: country.flag,
       flags: {
-        svg: country.flags.svg
+        svg: country.flags?.svg ?? ''
       },
       cca2: country.cca2,
       name: {
-        official: country.name.official
+        official: country.name?.official ?? ''
       },
-      capital: country.capital[0],
-      population: country.population
+      capital: country.capital?.[0] ?? 'No capital',
+      population: country.population ?? 0
     }
   }
 
