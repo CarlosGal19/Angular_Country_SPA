@@ -1,4 +1,4 @@
-<country-search-input (capital)="query.set($event)" placeholderMessage="capital" />
+<country-search-input (capital)="query.set($event)" placeholderMessage="capital" [initialValue]="this.query()" />
 <country-search-table
   [countries]="countryResource.value() ?? []"
   [errorMessage]="countryResource.error()?.message"

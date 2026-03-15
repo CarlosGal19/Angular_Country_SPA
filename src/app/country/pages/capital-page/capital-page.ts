@@ -4,6 +4,7 @@ import { CountrySearchTable } from '../../components/country-search-table/countr
 import { CountryService } from '../../services/country.service';
 import { of } from 'rxjs';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'capital-page',
@@ -13,7 +14,10 @@ import { rxResource } from '@angular/core/rxjs-interop';
 export class CapitalPage {
   countryService = inject(CountryService);
 
-  query = signal('');
+  activatedRoute = inject(ActivatedRoute);
+  queryParam = this.activatedRoute.snapshot.queryParamMap.get('query') ?? '';
+
+  query = signal(this.queryParam);
 
   // Resource works with observables
   // Resource works with promises
