@@ -5,6 +5,7 @@ import { CountrySearchTable } from "../../components/country-search-table/countr
 import { CountryService } from '../../services/country.service';
 import { of } from 'rxjs';
 import { RegionCountrySearcher } from "../../components/region-country-searcher/region-country-searcher";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-region-page',
@@ -15,7 +16,12 @@ export class RegionPage {
 
   countryService = inject(CountryService);
 
-  query = signal('');
+  activatedRoute = inject(ActivatedRoute);
+  router = inject(Router);
+
+  queryParam = this.activatedRoute.snapshot.queryParamMap.get('query') ?? ''
+
+  query = signal(this.queryParam);
 
   countryRegionResource = rxResource({
     params: () => ({
@@ -23,6 +29,12 @@ export class RegionPage {
     }),
     stream: ({params}) => {
       if(params.region == '') return of([]);
+
+      this.router.navigate(['/country/region'], {
+        queryParams: {
+          query: params.region
+        }
+      })
 
       return this.countryService.getCountries(params.region, 'region');
     }

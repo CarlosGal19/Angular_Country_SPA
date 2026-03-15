@@ -1,4 +1,4 @@
-import { Component, output, signal } from '@angular/core';
+import { Component, input, linkedSignal, output, signal } from '@angular/core';
 import { Region } from '../../interfaces/region-options.type';
 
 @Component({
@@ -9,6 +9,8 @@ import { Region } from '../../interfaces/region-options.type';
 export class RegionCountrySearcher {
   region = output<string>();
 
+  initialValue = input<string>();
+
   public regions: Region[] = [
     'Africa',
     'Americas',
@@ -18,7 +20,7 @@ export class RegionCountrySearcher {
     'Antarctic',
   ];
 
-  currentRegion =  signal<string>('')
+  currentRegion =  linkedSignal<string>(() => this.initialValue() ?? '')
 
   updateRegion(value: string) {
     this.currentRegion.set(value);

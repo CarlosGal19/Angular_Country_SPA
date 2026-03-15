@@ -1,5 +1,5 @@
 <!-- <country-search-input (capital)="query.set($event)" placeholderMessage="region"/> -->
-<region-country-searcher (region)="this.query.set($event)" />
+<region-country-searcher (region)="this.query.set($event)" [initialValue]="this.query()" />
 
 <country-search-table
   [countries]="countryRegionResource.value() ?? []"
