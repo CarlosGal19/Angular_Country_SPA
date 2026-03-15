@@ -4,7 +4,7 @@ import { CountrySearchTable } from '../../components/country-search-table/countr
 import { CountryService } from '../../services/country.service';
 import { of } from 'rxjs';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'capital-page',
@@ -13,8 +13,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CapitalPage {
   countryService = inject(CountryService);
-
   activatedRoute = inject(ActivatedRoute);
+  router = inject(Router);
+
   queryParam = this.activatedRoute.snapshot.queryParamMap.get('query') ?? '';
 
   query = signal(this.queryParam);
@@ -27,6 +28,12 @@ export class CapitalPage {
     }),
     stream: ({ params }) => {
       if (params.query == '') return of([]);
+
+      this.router.navigate(['/country/capital'], {
+        queryParams: {
+          query: params.query
+        }
+      })
 
       // firstValueFrom parse an observable to a source reference (signal)
       return this.countryService.getCountries(params.query, 'capital')
