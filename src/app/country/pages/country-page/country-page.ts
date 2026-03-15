@@ -4,6 +4,7 @@ import { CountryService } from '../../services/country.service';
 import { CountrySearchTable } from '../../components/country-search-table/country-search-table';
 import { of } from 'rxjs';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'country-page',
@@ -12,8 +13,12 @@ import { rxResource } from '@angular/core/rxjs-interop';
 })
 export class CountryPage {
   countryService = inject(CountryService);
+  router = inject(Router);
+  activatedRoute = inject(ActivatedRoute);
 
-  query = signal('');
+  queryParam = this.activatedRoute.snapshot.queryParamMap.get('query') ?? ''
+
+  query = signal(this.queryParam);
 
   countryNameResource = rxResource({
     params: () => ({
@@ -21,6 +26,11 @@ export class CountryPage {
     }),
     stream: ({params}) => {
       if (params.name == '') return of([]);
+      this.router.navigate(['/country/country'], {
+        queryParams: {
+          query: params.name
+        }
+      })
 
       return this.countryService.getCountries(params.name, 'name');
     }
