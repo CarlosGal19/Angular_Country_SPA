@@ -1,7 +1,5 @@
 <div class="flex flex-wrap justify-evenly w-full md:w-1/2 gap-2">
-  <button (click)="this.updateRegion('Africa')" class="btn w-2/5 md:w-1/6" [class.btn-accent]="this.currentRegion() == 'Africa'">Africa</button>
-  <button (click)="this.updateRegion('Americas')" class="btn btn-accent w-2/5 md:w-1/6" [class.btn-accent]="this.currentRegion() == 'Americas'">Americas</button>
-  <button (click)="this.updateRegion('Asia')" class="btn btn-accent w-2/5 md:w-1/6" [class.btn-accent]="this.currentRegion() == 'Asia'">Asia</button>
-  <button (click)="this.updateRegion('Europe')" class="btn btn-accent w-2/5 md:w-1/6" [class.btn-accent]="this.currentRegion() == 'Europe'">Europe</button>
-  <button (click)="this.updateRegion('Oceania')" class="btn btn-accent w-2/5 md:w-1/6" [class.btn-accent]="this.currentRegion() == 'Oceania'">Oceania</button>
+  @for (region of regions; track $index) {
+    <button (click)="this.updateRegion(region)" class="btn w-2/5 md:w-1/8" [class.btn-accent]="this.currentRegion() == region">{{region}}</button>
+  }
 </div>

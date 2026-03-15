@@ -8,6 +8,15 @@ import { Component, computed, output, signal } from '@angular/core';
 export class RegionCountrySearcher {
   region = output<string>();
 
+  public regions: string[] = [
+    'Africa',
+    'Americas',
+    'Asia',
+    'Europe',
+    'Oceania',
+    'Antarctic',
+  ];
+
   currentRegion =  signal<string>('')
 
   updateRegion(value: string) {
