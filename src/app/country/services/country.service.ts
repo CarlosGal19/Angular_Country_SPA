@@ -10,7 +10,7 @@ import { CountryMapper } from '../helpers/country.mapper';
 })
 export class CountryService {
   private http = inject(HttpClient);
-  private countryMapper = inject(CountryMapper)
+  private countryMapper = inject(CountryMapper);
 
   private queryCachePerCapital = new Map<string, ICountry[]>();
   private queryCachePerName = new Map<string, ICountry[]>();
@@ -18,25 +18,26 @@ export class CountryService {
 
   capitalCountries = signal('');
 
-  getCountries(query: string, option: 'name' | 'capital' | 'alpha' | 'region' ) {
+  getCountries(query: string, option: 'name' | 'capital' | 'alpha' | 'region') {
     const lowerQuery = query.toLocaleLowerCase();
 
     if (option == 'capital' && this.queryCachePerCapital.has(lowerQuery)) {
-      return of(this.queryCachePerCapital.get(lowerQuery))
+      return of(this.queryCachePerCapital.get(lowerQuery));
     }
 
     if (option == 'name' && this.queryCachePerName.has(lowerQuery)) {
-      return of(this.queryCachePerName.get(lowerQuery))
+      return of(this.queryCachePerName.get(lowerQuery));
     }
 
     if (option == 'region' && this.queryCachePerRegion.has(lowerQuery)) {
-      return of(this.queryCachePerRegion.get(lowerQuery))
+      return of(this.queryCachePerRegion.get(lowerQuery));
     }
 
-    return this.http.get<ICountryResponse[]>(`https://restcountries.com/v3.1/${option}/${lowerQuery}`).
-      pipe(
-        map(c => {
-          return this.countryMapper.mapCountries(c)
+    return this.http
+      .get<ICountryResponse[]>(`https://restcountries.com/v3.1/${option}/${lowerQuery}`)
+      .pipe(
+        map((c) => {
+          return this.countryMapper.mapCountries(c);
         }),
         tap((data) => {
           if (option == 'capital') {
@@ -50,8 +51,8 @@ export class CountryService {
           }
         }),
         catchError(() => {
-          return throwError(() => new Error('Failed to fetch countries'))
-        })
-      )
+          return throwError(() => new Error('Failed to fetch countries'));
+        }),
+      );
   }
 }
