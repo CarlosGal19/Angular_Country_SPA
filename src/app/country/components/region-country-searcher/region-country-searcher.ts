@@ -1,4 +1,5 @@
-import { Component, computed, output, signal } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
+import { Region } from '../../interfaces/region-options.type';
 
 @Component({
   selector: 'region-country-searcher',
@@ -8,7 +9,7 @@ import { Component, computed, output, signal } from '@angular/core';
 export class RegionCountrySearcher {
   region = output<string>();
 
-  public regions: string[] = [
+  public regions: Region[] = [
     'Africa',
     'Americas',
     'Asia',
