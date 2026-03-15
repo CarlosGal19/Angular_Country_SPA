@@ -4,10 +4,11 @@ import { CountrySearchInput } from "../../../shared/components/country-search-in
 import { CountrySearchTable } from "../../components/country-search-table/country-search-table";
 import { CountryService } from '../../services/country.service';
 import { of } from 'rxjs';
+import { RegionCountrySearcher } from "../../components/region-country-searcher/region-country-searcher";
 
 @Component({
   selector: 'app-region-page',
-  imports: [CountrySearchInput, CountrySearchTable],
+  imports: [CountrySearchTable, RegionCountrySearcher],
   templateUrl: './region-page.html',
 })
 export class RegionPage {
