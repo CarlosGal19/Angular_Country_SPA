@@ -1,3 +1,4 @@
+import { Region, regions } from './../interfaces/region-options.type';
 import { ICountry } from './../interfaces/country.interface';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
@@ -21,15 +22,19 @@ export class CountryService {
   getCountries(query: string, option: 'name' | 'capital' | 'alpha' | 'region') {
     const lowerQuery = query.toLocaleLowerCase();
 
-    if (option == 'capital' && this.queryCachePerCapital.has(lowerQuery)) {
+    if (option === 'capital' && this.queryCachePerCapital.has(lowerQuery)) {
       return of(this.queryCachePerCapital.get(lowerQuery));
     }
 
-    if (option == 'name' && this.queryCachePerName.has(lowerQuery)) {
+    if (option === 'name' && this.queryCachePerName.has(lowerQuery)) {
       return of(this.queryCachePerName.get(lowerQuery));
     }
 
-    if (option == 'region' && this.queryCachePerRegion.has(lowerQuery)) {
+    if(option === 'region' && !regions.includes(query as Region)) {
+      return of([]);
+    }
+
+    if (option === 'region' && this.queryCachePerRegion.has(lowerQuery)) {
       return of(this.queryCachePerRegion.get(lowerQuery));
     }
 
@@ -40,13 +45,13 @@ export class CountryService {
           return this.countryMapper.mapCountries(c);
         }),
         tap((data) => {
-          if (option == 'capital') {
+          if (option === 'capital') {
             this.queryCachePerCapital.set(lowerQuery, data);
           }
-          if (option == 'name') {
+          if (option === 'name') {
             this.queryCachePerName.set(lowerQuery, data);
           }
-          if (option == 'region') {
+          if (option === 'region') {
             this.queryCachePerRegion.set(lowerQuery, data);
           }
         }),
