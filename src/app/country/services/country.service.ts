@@ -14,6 +14,7 @@ export class CountryService {
 
   private queryCachePerCapital = new Map<string, ICountry[]>();
   private queryCachePerName = new Map<string, ICountry[]>();
+  private queryCachePerRegion = new Map<string, ICountry[]>();
 
   capitalCountries = signal('');
 
@@ -28,6 +29,10 @@ export class CountryService {
       return of(this.queryCachePerName.get(lowerQuery))
     }
 
+    if (option == 'region' && this.queryCachePerRegion.has(lowerQuery)) {
+      return of(this.queryCachePerRegion.get(lowerQuery))
+    }
+
     return this.http.get<ICountryResponse[]>(`https://restcountries.com/v3.1/${option}/${lowerQuery}`).
       pipe(
         map(c => {
@@ -39,6 +44,9 @@ export class CountryService {
           }
           if (option == 'name') {
             this.queryCachePerName.set(lowerQuery, data);
+          }
+          if (option == 'region') {
+            this.queryCachePerRegion.set(lowerQuery, data);
           }
         }),
         catchError(() => {
